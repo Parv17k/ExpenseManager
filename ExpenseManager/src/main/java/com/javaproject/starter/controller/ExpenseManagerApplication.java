@@ -1,4 +1,4 @@
-package com.javaproject.starter;
+package com.javaproject.starter.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
