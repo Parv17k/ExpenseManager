@@ -15,7 +15,13 @@
 	<description>Expense Manager Project</description>
 	<properties>
 		<java.version>11</java.version>
+		<start-class>com.javaproject.starter.ExpenseManagerApplication</start-class>
 	</properties>
+	
+    <!-- The main class to start by executing java -jar -->
+   
+
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
