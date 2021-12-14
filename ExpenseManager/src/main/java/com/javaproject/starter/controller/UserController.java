@@ -30,21 +30,21 @@ public List<User> getAllUsers(){
 	return us.getUsers();
 }
 
-@GetMapping("/user/{emailid}")
+@GetMapping("/users/{emailid}")
 public User getUser(@PathVariable String emailid){
 	return us.getUser(emailid);
 }
 
-@PostMapping("/user")
+@PostMapping("/users")
 public User addUser(@RequestBody User user){
 	return us.addUser(user);
 }
 
-@PutMapping("/user")
+@PutMapping("/users")
 public User updateUser(@RequestBody User user){
 	return us.addUser(user);
 }
-@DeleteMapping("/user/{emailid}")
+@DeleteMapping("/users/{emailid}")
 public User deleteUser(@PathVariable String emailid){
 	return us.deleteUser(emailid);
 }

@@ -1,46 +1,38 @@
 package com.javaproject.starter.service;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.javaproject.starter.model.Company;
-import com.javaproject.starter.model.Employee;
-import com.javaproject.starter.model.Expense;
-import com.javaproject.starter.model.User;
+import com.javaproject.starter.repository.CompanyRepository;
 @Service
 public class CompanyServiceImpl implements CompanyService {
-	List<Company> companylist;
+	@Autowired
+	CompanyRepository cr;
 	@Override
-	public List<Company> getCompanies() {
-		// TODO Auto-generated method stub
-		
+	public Company addCompany(Company company) {
+		return cr.save(company);
+	}
+	
+	@Override
+	public List<Company> getAllCompanies() {
+		return cr.findAll();
+	}
+
+	@Override
+	public Company updateCompany(Company company) {
+		return cr.save(company);
+	}
+
+	@Override
+	public Company deleteCompany(long id) {
+		cr.deleteById(id);
 		return null;
 	}
 
 	@Override
-	public Company getCompany() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User getOwner() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Expense> getExpenses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Employee> getEmployees() {
-		// TODO Auto-generated method stub
-		return null;
+	public Company getCompany(long id) {
+	return cr.getById(id);
 	}
 
 }

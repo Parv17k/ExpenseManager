@@ -21,26 +21,26 @@ public class ExpenseController {
 	@Autowired
 	private ExpenseService es;
 		
-	@GetMapping("/expense")
+	@GetMapping("/expenses")
 	public List<Expense> getAllUsers(){
 		return es.getExpense();
 	}
 
-	@GetMapping("/expense/{id}")
+	@GetMapping("/expenses/{id}")
 	public Expense getExpense(@PathVariable String id){
 		return es.getExpense(Long.parseLong(id));
 	}
 
-	@PostMapping("/expense")
+	@PostMapping("/expenses")
 	public Expense addExpense(@RequestBody Expense expense){
 		return es.addExpense(expense);
 	}
 
-	@PutMapping("/expense")
+	@PutMapping("/expenses")
 	public Expense updateExpense(@RequestBody Expense expense){
 		return es.addExpense(expense);
 	}
-	@DeleteMapping("/expense/{id}")
+	@DeleteMapping("/expenses/{id}")
 	public Expense deleteExpense(@PathVariable String id){
 		return es.deleteExpense(Long.parseLong(id));
 	}
