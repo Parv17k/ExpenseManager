@@ -11,8 +11,89 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Expense {
+	
+	public Expense() {}
+@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Expenseurl == null) ? 0 : Expenseurl.hashCode());
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
+		result = prime * result + ((employee == null) ? 0 : employee.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(expenseCost);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((longDesc == null) ? 0 : longDesc.hashCode());
+		result = prime * result + ((modified == null) ? 0 : modified.hashCode());
+		result = prime * result + ((shortDesc == null) ? 0 : shortDesc.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Expense other = (Expense) obj;
+		if (Expenseurl == null) {
+			if (other.Expenseurl != null)
+				return false;
+		} else if (!Expenseurl.equals(other.Expenseurl))
+			return false;
+		if (created == null) {
+			if (other.created != null)
+				return false;
+		} else if (!created.equals(other.created))
+			return false;
+		if (createdBy == null) {
+			if (other.createdBy != null)
+				return false;
+		} else if (!createdBy.equals(other.createdBy))
+			return false;
+		if (employee == null) {
+			if (other.employee != null)
+				return false;
+		} else if (!employee.equals(other.employee))
+			return false;
+		if (Double.doubleToLongBits(expenseCost) != Double.doubleToLongBits(other.expenseCost))
+			return false;
+		if (id != other.id)
+			return false;
+		if (longDesc == null) {
+			if (other.longDesc != null)
+				return false;
+		} else if (!longDesc.equals(other.longDesc))
+			return false;
+		if (modified == null) {
+			if (other.modified != null)
+				return false;
+		} else if (!modified.equals(other.modified))
+			return false;
+		if (shortDesc == null) {
+			if (other.shortDesc != null)
+				return false;
+		} else if (!shortDesc.equals(other.shortDesc))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
+	}
+
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private long id;
@@ -23,8 +104,8 @@ public double getExpenseCost() {
 public void setExpenseCost(double expenseCost) {
 	this.expenseCost = expenseCost;
 }
-public User getCreatedBy() {
-	return createdBy;
+public String getCreatedBy() {
+	return createdBy.getEmailID();
 }
 public void setCreatedBy(User createdBy) {
 	this.createdBy = createdBy;
@@ -35,8 +116,8 @@ public ExpenseType getType() {
 public void setType(ExpenseType type) {
 	this.type = type;
 }
-public Employee getEmployee() {
-	return employee;
+public long getEmployee() {
+	return employee.getEmpId();
 }
 public void setEmployee(Employee employee) {
 	this.employee = employee;
@@ -99,7 +180,6 @@ private Date created;
 
 @UpdateTimestamp
 private Date modified;
-
 
 
 }
