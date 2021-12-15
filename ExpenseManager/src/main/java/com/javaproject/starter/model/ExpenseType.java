@@ -65,7 +65,7 @@ public boolean equals(Object obj) {
 	return true;
 }
 private String Desc;
-@OneToMany(mappedBy="type",fetch = FetchType.LAZY)
+@OneToMany(mappedBy="type")
 private List<Expense> expenses;
 public List<Expense> getExpenses() {
 	return expenses;

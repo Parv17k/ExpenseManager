@@ -11,5 +11,5 @@ public User deleteUser(String emailId);//Delete
 public User getUser(String emailId);// Read
 public List<Expense> getExpenses(User user);//Read All Expense 
 public List<Company> getCompanies(User user); // Read All companies
-
+public User getUserByEmail(String emailId);// Read
 }

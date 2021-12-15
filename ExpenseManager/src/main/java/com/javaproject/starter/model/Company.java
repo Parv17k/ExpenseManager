@@ -27,7 +27,13 @@ private String companyName;
 private User owner;
 
 public String getOwner() {
+	try {
 	return owner.getEmailID();
+	}
+	catch(Exception e)
+	{
+	return null;	
+	}
 }
 public long getId() {
 	return id;

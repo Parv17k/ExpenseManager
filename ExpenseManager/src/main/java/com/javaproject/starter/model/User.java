@@ -1,6 +1,7 @@
 package com.javaproject.starter.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,15 +30,25 @@ public class User {
 	
 	public User() {};
 	
-	@OneToMany(mappedBy="owner",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="owner")
 
 	private List<Company> companies;
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	@OneToMany(mappedBy="createdBy",cascade=CascadeType.ALL)
 	private List<Expense> expenses;
 	
 	@Id
 	private String email;
+	@ManyToMany
+	@JoinTable(name="urole", joinColumns = @JoinColumn(name = "email"), inverseJoinColumns = @JoinColumn(name = "id"))
+	private Set<Role> roles;
 
 	public List<Company> getCompanies() {
 		return companies;

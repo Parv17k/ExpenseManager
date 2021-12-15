@@ -37,13 +37,14 @@ public Company addCompany(@RequestBody Company company){
 }
 
 @PutMapping("/companies")
-public Company updateUser(@RequestBody Company company){
+public Company updateCompany(@RequestBody Company company){
 	return cs.addCompany(company);
 }
 
 @DeleteMapping("/companies/{id}")
-public Company deleteUser(@PathVariable String id){
-	return cs.deleteCompany(Long.parseLong(id));
+public Company deleteCompany(@PathVariable String id){
+	cs.deleteCompany(Long.parseLong(id));
+	return null;
 }
 
 }
