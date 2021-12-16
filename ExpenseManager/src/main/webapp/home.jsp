@@ -32,4 +32,34 @@
 		<p> MANAGE EXPENSE TYPES </p>
 	</div>
 </body>
+<script>
+(async function() {
+	let url="/username";
+	let email="anonymousUser";
+	email = await await new Promise(resolve => {
+		   var xhr = new XMLHttpRequest();
+		   xhr.open("GET", url, true);
+		   xhr.onload = function(e) {
+			   if (xhr.readyState == 4 && xhr.status == 200) {
+				  if(xhr.response!="anonymousUser")
+				   localStorage.setItem("email",xhr.response);
+				  else
+					 document.write("<h1>Login and try again</h1>")
+				  }	
+		     resolve(xhr.response);  
+		   };
+		   xhr.onerror = function () {
+			   document.write("<h1>Login and try again</h1>");
+		     resolve(undefined);
+		     alert("Issue with your user, please login and comeback");
+		     console.error("** An error occurred during the XMLHttpRequest");
+		   };
+		   xhr.send();
+		}) 
+	
+	return await await email;
+})();
+
+
+</script>
 </html>

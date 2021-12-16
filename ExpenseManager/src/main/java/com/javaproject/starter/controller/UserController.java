@@ -35,7 +35,7 @@ public List<User> getAllUsers(){
 
 @GetMapping("/users/{emailid}")
 public User getUser(@PathVariable String emailid){
-	return us.getUser(emailid);
+	return us.getUserByEmail(emailid);
 }
 
 @PostMapping("/users")

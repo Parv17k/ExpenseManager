@@ -1,6 +1,5 @@
 package com.javaproject.starter.controller;
 
-import java.security.Principal;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,6 +39,21 @@ public class MainController{
 	public String loginPage( ) {
 		return "login.jsp";
 	}
+	@RequestMapping(value = "/expensetypemanagement", method = RequestMethod.GET)
+	public String expenseTypePage() {
+		
+		return "expensetype.jsp";
+	}
+	@RequestMapping(value = "/employeemanagement", method = RequestMethod.GET)
+	public String employeePage() {
+		return "employee.jsp";
+	}
+	
+@RequestMapping(value = "/company", method = RequestMethod.GET)
+public String companyPage() {
+	
+	return "company.jsp";
+}
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration() {
 		
