@@ -21,7 +21,7 @@
             <td><input type='text' id="name" name='name' /></td>
          </tr>
          <tr>
-            <td><button onclick="register();return false;" />register</button></td>
+            <td><button onclick="register();return false;"/>register</button></td>
          </tr>
       </table>
   </form>

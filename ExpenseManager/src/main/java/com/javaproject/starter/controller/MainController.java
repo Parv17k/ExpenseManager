@@ -1,14 +1,17 @@
 package com.javaproject.starter.controller;
 
+import java.security.Principal;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javaproject.starter.Security.SecurityService;
 import com.javaproject.starter.model.User;
 import com.javaproject.starter.service.UserService;
 
@@ -16,39 +19,39 @@ import com.javaproject.starter.service.UserService;
 public class MainController{
 	@Autowired
 	private UserService us;
-	@Autowired
-	private SecurityService ss;
+
 	@RequestMapping("index")
-	public String indexPage(String name ) {
-		return "index.jsp";
+	public String indexPage() {
+	
+		return "home.jsp";
 	}
+	 @GetMapping(value = "/username")
+	  @ResponseBody
+	    public String currentUserName(Authentication authentication) {
+	    
+		 String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		  if (StringUtils.isEmpty(username)) {
+		    username = "";
+		  }
+		  return username;
+
+	    }
 	@RequestMapping("login")
 	public String loginPage( ) {
 		return "login.jsp";
 	}
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration() {
-		System.out.print("Reg1");
-		return "registration.jsp";
+		
+		return "signup.jsp";
 	}
 	
 	@RequestMapping(value = "/registration",method = RequestMethod.POST)
 	public String signupPage(@RequestBody User user) {
-		System.out.print("Reg");
 		us.addUser(user);
-
-		ss.autologin(user.getEmailID(), user.getPassword());
-
 		return "redirect:/index";
 	}
 
-	@RequestMapping(value="home")
-	public ModelAndView home(@RequestParam String user)
-	{
-		System.out.print(user);
-		ModelAndView mv= new ModelAndView("home.jsp");
-		mv.addObject("name",user);
-		return mv;
-	}
+	
 
 }
