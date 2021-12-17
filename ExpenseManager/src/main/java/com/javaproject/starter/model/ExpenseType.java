@@ -1,5 +1,6 @@
 package com.javaproject.starter.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -22,53 +24,29 @@ public ExpenseType(long id, String type, String desc, List<Expense> expenses) {
 		Desc = desc;
 		this.expenses = expenses;
 	}
+public String getUser() {
+	return user.getEmailID();
+}
+public void setUser(User user) {
+	this.user = user;
+}
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private long id;
 private String type;
-@Override
-public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((Desc == null) ? 0 : Desc.hashCode());
-	result = prime * result + ((expenses == null) ? 0 : expenses.hashCode());
-	result = prime * result + (int) (id ^ (id >>> 32));
-	result = prime * result + ((type == null) ? 0 : type.hashCode());
-	return result;
-}
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	ExpenseType other = (ExpenseType) obj;
-	if (Desc == null) {
-		if (other.Desc != null)
-			return false;
-	} else if (!Desc.equals(other.Desc))
-		return false;
-	if (expenses == null) {
-		if (other.expenses != null)
-			return false;
-	} else if (!expenses.equals(other.expenses))
-		return false;
-	if (id != other.id)
-		return false;
-	if (type == null) {
-		if (other.type != null)
-			return false;
-	} else if (!type.equals(other.type))
-		return false;
-	return true;
-}
+@ManyToOne
+private User user;
+
 private String Desc;
 @OneToMany(mappedBy="type")
 private List<Expense> expenses;
-public List<Expense> getExpenses() {
-	return expenses;
+public List<Long> getExpenses() {
+	List<Long> exp=new ArrayList<Long>();
+	for(Expense e:expenses)
+	{
+		exp.add(e.getId());
+	}
+	return exp;
 }
 public void setExpenses(List<Expense> expenses) {
 	this.expenses = expenses;

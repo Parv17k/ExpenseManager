@@ -2,6 +2,7 @@ package com.javaproject.starter.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,9 +24,9 @@ public Employee() {}
 private String department;
 private String name;
 private String email;
-@ManyToOne
+@ManyToOne(cascade = CascadeType.MERGE)
 private Company company;
-@OneToMany(mappedBy="employee")
+@OneToMany(mappedBy="employee",cascade = CascadeType.MERGE)
 private List<Expense> expenses;
 public long getEmpId() {
 	return id;

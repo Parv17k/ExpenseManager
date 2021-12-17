@@ -28,12 +28,20 @@ public class User {
 	private String name;
 	private String password;
 	
+	public List<ExpenseType> getExpenseTypes() {
+		return expenseTypes;
+	}
+	public void setExpenseTypes(List<ExpenseType> expenseTypes) {
+		this.expenseTypes = expenseTypes;
+	}
 	public User() {};
 	
-	@OneToMany(mappedBy="owner")
-
+	@OneToMany(mappedBy="owner",cascade = CascadeType.MERGE)
 	private List<Company> companies;
-
+	
+	@OneToMany(mappedBy="user",cascade = CascadeType.MERGE)
+	private List<ExpenseType> expenseTypes;
+	
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -41,7 +49,7 @@ public class User {
 		this.roles = roles;
 	}
 
-	@OneToMany(mappedBy="createdBy",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="createdby",cascade=CascadeType.MERGE)
 	private List<Expense> expenses;
 	
 	@Id
@@ -56,7 +64,7 @@ public class User {
 	public void setCompanies(List<Company> companies) {
 		this.companies = companies;
 	}
-	//@JsonManagedReference
+
 	public List<Expense> getExpenses() {
 		return expenses;
 	}

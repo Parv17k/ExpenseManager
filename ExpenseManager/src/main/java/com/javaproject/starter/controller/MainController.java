@@ -1,6 +1,9 @@
 package com.javaproject.starter.controller;
 
 import org.springframework.security.core.Authentication;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -9,36 +12,61 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.javaproject.starter.model.Expense;
 import com.javaproject.starter.model.User;
+import com.javaproject.starter.service.ExpenseService;
+import com.javaproject.starter.service.MailService;
 import com.javaproject.starter.service.UserService;
 
 @Controller
 public class MainController{
 	@Autowired
 	private UserService us;
-
+	@Autowired
+	private MailService ms;
+	@Autowired
+	private ExpenseService es;
+	
 	@RequestMapping("index")
 	public String indexPage() {
-	
-		return "home.jsp";
+	return "home.jsp";
 	}
-	 @GetMapping(value = "/username")
+	 
+	
+	@GetMapping(value = "/username")
 	  @ResponseBody
 	    public String currentUserName(Authentication authentication) {
 	    
-		 String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		  if (StringUtils.isEmpty(username)) {
-		    username = "";
+		 String us = SecurityContextHolder.getContext().getAuthentication().getName();
+		  if (StringUtils.isEmpty(us)) {
+		    us = "";
 		  }
-		  return username;
-
+		  return us;
 	    }
+
 	@RequestMapping("login")
 	public String loginPage( ) {
 		return "login.jsp";
 	}
+	
+
+	
+	@RequestMapping("/sendemail")
+	public String sendEmail(@RequestParam String text,@RequestParam String to) {
+		try {
+		ms.sendMail(text, to);
+		return "Done";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "Error";
+		}
+	
+	}
+	
 	@RequestMapping(value = "/expensetypemanagement", method = RequestMethod.GET)
 	public String expenseTypePage() {
 		

@@ -41,4 +41,9 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
 		return etr.getById(id);
 	}
 
+	@Override
+	public List<ExpenseType> getExpenseTypeByEmail(String email) {
+		return etr.getByUser(email);
+	}
+
 }

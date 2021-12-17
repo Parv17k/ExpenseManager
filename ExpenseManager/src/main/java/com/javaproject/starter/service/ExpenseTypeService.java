@@ -11,7 +11,7 @@ public List<ExpenseType> getExpenseTypes(); // ReadAll
 public ExpenseType updateExpenseType(ExpenseType expenseType);//Update
 public ExpenseType deleteExpenseType(long id);//Delete
 public ExpenseType getExpenseType(long id);// Read
-
+public List<ExpenseType> getExpenseTypeByEmail(String email);// Read
 
 
 }

@@ -13,6 +13,6 @@ public interface ExpenseService {
 		public Expense updateExpense(Expense expense);//Update
 		public Expense deleteExpense(long id);//Delete
 		public Expense getExpense(long id);// Read
-		
+
 
 }

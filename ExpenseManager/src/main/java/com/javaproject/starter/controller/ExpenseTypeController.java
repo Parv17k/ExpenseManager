@@ -44,4 +44,8 @@ public class ExpenseTypeController {
 	public ExpenseType deleteExpenseType(@PathVariable String id){
 		return es.deleteExpenseType(Long.parseLong(id));
 	}
+	@GetMapping("/expensetype/{email}")
+	public List<ExpenseType> getExpenseTypeByEmail(@PathVariable String email){
+		return es.getExpenseTypeByEmail(email);
+	}
 }
