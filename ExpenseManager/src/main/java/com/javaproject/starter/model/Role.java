@@ -13,8 +13,16 @@ public class Role {
     private Long id;
     private String name;
     private Set<User> users;
+    private String Type;
+    public String getType() {
+		return Type;
+	}
 
-    @Id
+	public void setType(String type) {
+		Type = type;
+	}
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
@@ -36,7 +44,6 @@ public class Role {
     public Set<User> getUsers() {
         return users;
     }
-
     public void setUsers(Set<User> users) {
         this.users = users;
     }

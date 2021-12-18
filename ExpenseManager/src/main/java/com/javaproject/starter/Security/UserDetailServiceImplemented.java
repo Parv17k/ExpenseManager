@@ -23,13 +23,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserDetailServiceImplemented implements UserDetailsService{
 	@Autowired
 	private UserRepository ur;
-
-
-	@Transactional(readOnly = true)
+	@Transactional(readOnly=true)
 	@Override
 	public UserDetails loadUserByUsername(String email)
-			throws UsernameNotFoundException {
-		User user=null;
+			throws
+			UsernameNotFoundException 
+	{
+	User user=null;
 	try {
 		 user = ur.findByEmail(email);
 	}
@@ -37,12 +37,9 @@ public class UserDetailServiceImplemented implements UserDetailsService{
 	{
 				new UsernameNotFoundException(String.format("User not found", email));;
 	}
-
 		Set<GrantedAuthority> ga = new HashSet<>();
-		for (Role role : user.getRoles()){
-			ga.add(new SimpleGrantedAuthority(role.getName()));
-		}
-
+		for (Role r : user.getRoles())
+			ga.add(new SimpleGrantedAuthority(r.getName()));
 		return new org.springframework.security.core.userdetails.User(user.getEmailID(),user.getPassword(), ga);
 		
 	}

@@ -13,28 +13,25 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SecurityServiceImp implements SecurityService{
+	 @Autowired
+	    private UserDetailsService userDetailsService;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
+   
 
     @Override
-    public String findLoggedInUsername() {
+    public String zindInUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
+        if (userDetails instanceof UserDetails)
             return ((UserDetails)userDetails).getUsername();
-        }
-
         return null;
     }
 
-    @Override
-    public void autologin(String email, String password) {
+    public void atlogin(String email, String password) {
         UserDetails ud = userDetailsService.loadUserByUsername(email);
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(ud, password, ud.getAuthorities());
-
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(ud,password,ud.getAuthorities());
         authenticationManager.authenticate(token);
 
         if (token.isAuthenticated()) 

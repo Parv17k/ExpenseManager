@@ -35,20 +35,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private UserDetailsService userDetailsService;
-	 @Bean
-	    public AuthenticationManager getAuthenticationManager() throws Exception {
-	        return super.authenticationManagerBean();
-	    }
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
 		http
 		.csrf().disable()
 		.authorizeRequests()
@@ -70,10 +58,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.permitAll();
 		http.headers().frameOptions().disable();
 	}
+	 @Bean
+	    public AuthenticationManager getAuthenticationManager() throws Exception {
+	        return super.authenticationManagerBean();
+	    }
+	 
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
+	
+	@Autowired
+	private UserDetailsService uds;
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+		auth.userDetailsService(uds).passwordEncoder(bCryptPasswordEncoder());
 	}
 	
 

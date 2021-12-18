@@ -1,7 +1,7 @@
 package com.javaproject.starter.Security;
 
 public interface SecurityService {
-	 String findLoggedInUsername();
-
-	   void autologin(String email, String password);
+	 void atlogin(String email, String password);
+	 public String zindInUsername();
+	
 }
