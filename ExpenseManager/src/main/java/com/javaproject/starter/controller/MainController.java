@@ -53,6 +53,10 @@ public class MainController{
 	public String loginPage( ) {
 		return "login.jsp";
 	}
+	@RequestMapping("/")
+	public String hPage( ) {
+		return "welcome.jsp";
+	}
 	
 
 	
