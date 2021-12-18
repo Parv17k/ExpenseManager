@@ -20,16 +20,21 @@
 		<h1>Start Tracking Your Expenses</h1>
 	</div>
 	<div class="box">
-		<p> MANAGE COMPANY </p>
+		<button class="btn" onclick="location.href='company.jsp';">MANAGE COMPANIES</button>
 	</div>
 	<div class="box">
-		<p> MANAGE EMPLOYEES </p>
+		<button class="btn" onclick="location.href='employee.jsp';">MANAGE EMPLOYEES</button>
 	</div>
 	<div class="box">
-		<p> MANAGE EXPENSES </p>
+		<button class="btn" onclick="location.href='expense.jsp';">MANAGE EXPENSES</button>
+	</div>	
+	<div class="box">
+		<button class="btn" onclick="location.href='expensetype.jsp';">MANAGE EXPENSE TYPES</button>
 	</div>
 	<div class="box">
-		<p> MANAGE EXPENSE TYPES </p>
+		<a class="btn1" id="export" target="_blank" >Import To Excel</a>
+		<a class="btn1" id="sendEmail" href="/emailSender.jsp">Send As Email</a>
+		
 	</div>
 </body>
 <script>
@@ -42,7 +47,10 @@
 		   xhr.onload = function(e) {
 			   if (xhr.readyState == 4 && xhr.status == 200) {
 				  if(xhr.response!="anonymousUser")
+					  {
 				   localStorage.setItem("email",xhr.response);
+				   document.getElementById("export").href="/expense/csv?email="+xhr.response;
+					  }
 				  else
 					 document.write("<h1>Login and try again</h1>")
 				  }	
@@ -59,6 +67,7 @@
 	
 	return await await email;
 })();
+
 
 
 </script>

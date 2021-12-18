@@ -3,6 +3,7 @@ package com.javaproject.starter.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,25 +35,20 @@ public void setUser(User user) {
 @GeneratedValue(strategy = GenerationType.AUTO)
 private long id;
 private String type;
-@ManyToOne
+@ManyToOne()
 private User user;
 
 private String Desc;
 @OneToMany(mappedBy="type")
 private List<Expense> expenses;
-public List<Long> getExpenses() {
-	List<Long> exp=new ArrayList<Long>();
-	for(Expense e:expenses)
-	{
-		exp.add(e.getId());
-	}
-	return exp;
+public long getId() {
+	return id;
+}
+public List<Expense> getExpenses() {
+	return expenses;
 }
 public void setExpenses(List<Expense> expenses) {
 	this.expenses = expenses;
-}
-public long getId() {
-	return id;
 }
 public void setId(long id) {
 	this.id = id;

@@ -117,6 +117,6 @@ public void setEmployees(List<Employee> employees) {
 	this.employees = employees;
 }
 private String desc;
-@OneToMany(mappedBy="company")
+@OneToMany(mappedBy="company",cascade = CascadeType.ALL)
 private List<Employee> employees;
 }

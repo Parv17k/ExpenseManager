@@ -37,6 +37,14 @@
 </body>
 <script type="text/javascript">
 function register(){
+	var email = document.getElementById("email").value;
+    var chk = email.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
+
+	if(!chk){
+		window.alert("Enter a valid email address");
+		window.location.href = "signup.jsp";
+	}
+	
 	const data = JSON.stringify({
 		  "emailID": document.getElementById("email").value,
 		  "id": Date.now(),

@@ -56,14 +56,13 @@ if(email=""||email=="anonymousUser")
 	
 var updateTable = async function()
 {
-	console.log("Update Table");
-	let url="/expensetype/";
+	let url="/users/"+localStorage.getItem("email");
 
 	let result = await new Promise(resolve => {
 		   var xhr = new XMLHttpRequest();
 		   xhr.open("GET", url, true);
 		   xhr.onload = function(e) {
-			 tableContent=xhr.response?JSON.parse(xhr.response):[];
+			 tableContent=xhr.response?JSON.parse(xhr.response)?.expenseTypes:[];
 			 if(tableContent!=[])
 				 {
 				 printTable(tableContent)
@@ -133,7 +132,10 @@ for(let i=0;i<tabledata.length;i++)
 var addExpense= async function(){
 	const data = JSON.stringify({
 		"type": document.getElementById("expensetype").value,
-		 "desc":  document.getElementById("desc").value
+		 "desc":  document.getElementById("desc").value,
+		 "user":{
+			 "emailID":localStorage.getItem("email")
+			 }
 		});
 
 		const xhr = new XMLHttpRequest();

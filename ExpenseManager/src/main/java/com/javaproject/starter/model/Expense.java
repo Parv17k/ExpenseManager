@@ -138,12 +138,12 @@ public void setEmployee(Employee employee) {
 
 private double expenseCost;
 private String longDesc;
-@ManyToOne(cascade = CascadeType.MERGE)
+@ManyToOne
 private User createdby;
-@ManyToOne(cascade = CascadeType.MERGE)
+@ManyToOne
 private ExpenseType type;
 
-@ManyToOne(cascade = CascadeType.MERGE)
+@ManyToOne
 private Employee employee;
 
 public long getId() {

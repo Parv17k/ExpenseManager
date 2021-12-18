@@ -24,9 +24,9 @@ public Employee() {}
 private String department;
 private String name;
 private String email;
-@ManyToOne(cascade = CascadeType.MERGE)
+@ManyToOne
 private Company company;
-@OneToMany(mappedBy="employee",cascade = CascadeType.MERGE)
+@OneToMany(mappedBy="employee")
 private List<Expense> expenses;
 public long getEmpId() {
 	return id;

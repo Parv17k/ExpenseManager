@@ -4,6 +4,8 @@ import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -55,15 +57,23 @@ public class MainController{
 
 	
 	@RequestMapping("/sendemail")
-	public String sendEmail(@RequestParam String text,@RequestParam String to) {
+	public String sendEmail(@RequestParam String text,@RequestParam String to,HttpServletResponse response) {
 		try {
 		ms.sendMail(text, to);
+		response.setStatus(HttpServletResponse.SC_ACCEPTED);
 		return "Done";
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			e.printStackTrace();response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return "Error";
 		}
+	
+	}
+	@RequestMapping("/emailsender")
+	public String emailSender(@RequestParam String text,@RequestParam String to) {
+	
+		return "emailSender.jsp";
+	
 	
 	}
 	

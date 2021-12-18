@@ -36,10 +36,10 @@ public class User {
 	}
 	public User() {};
 	
-	@OneToMany(mappedBy="owner",cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy="owner",cascade = CascadeType.ALL)
 	private List<Company> companies;
 	
-	@OneToMany(mappedBy="user",cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	private List<ExpenseType> expenseTypes;
 	
 	public Set<Role> getRoles() {
